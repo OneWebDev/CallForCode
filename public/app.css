@@ -1,0 +1,148 @@
+[v-cloak] { display: none; }
+
+* {
+    transition: all .1s ease-in-out;
+}
+
+body {
+    /* overflow-y: hidden; */
+}
+.page-wrapper > div {
+    display: inline-block;
+    vertical-align: top;
+    /* min-height: 100vh; */
+}
+
+.left-sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: #73AF86;
+    position: fixed;
+}
+
+.main-page {
+    /* width: 720px; */
+    /* margin-left: 220px; */
+    /* width: 100%; */
+    /* margin: 0px auto; */
+    /* width: calc(100vw - 240px - 500px - 40px);
+    margin-left: calc((100vw - 220px - 500px - 720px) / 2); */
+    /* margin-right: calc(110px + (100vw - 220px - 500px - 720px) / 2); */
+    /* padding: 0px 100px; */
+    /* padding-left: 220px; */
+    height: 100vh!important;
+    max-height: 100vh!important;
+    width: calc(100vw - 500px - 22px - 260px);
+    /* background-color: red; */
+    margin-left: 260px;
+
+    /* overflow-x: hidden; */
+}
+
+.right-sidebar {
+    width: 500px;
+    position: fixed;
+    right: 0px;
+    height: 100vh;
+    /* height: 200px; */
+    overflow-y: scroll;
+}
+
+.better-container {
+    width: 500px;
+    margin: auto;
+    /* margin-left: 150px; */
+}
+
+@media only screen and (max-width: 1200px) {
+    .main-page {
+        width: calc(100vw - 400px - 20px);
+        margin-left: 0px;
+    }
+    /* .better-container {
+        padding: 10px;
+        padding-left: 10px;
+        margin: 10px;
+    } */
+    .left-sidebar {
+        display: none!important;
+        width: 0px;
+    }
+    .sidebar-active {
+        background-color: white;
+    }
+    .sidebar-active {
+        display: none;  
+    }
+}
+.sidebar-active {
+    background-color: #639C76;
+}
+
+.rrrr > ul > li:hover:not(.sidebar-active) {
+    background-color: #639C76;
+    cursor: pointer;
+    color: white;
+}
+
+.left-sidebar > ul > a > li:hover:not(.sidebar-active) {
+    background-color: #639C76;
+    cursor: pointer;
+}
+
+.left-sidebar > ul > li:hover:not(.sidebar-active) {
+    background-color: #639C76;
+    cursor: pointer;
+}
+
+.actionItems:hover {
+    background-color: rgba(115, 175, 134, 0.3)!important;
+    border: 5px solid #73AF86!important;
+    cursor: pointer;
+}
+
+.plant-grid {
+    width: 400px;
+    padding-top: 20px;
+}
+
+.plot-background {
+    width: 80px;
+    margin: 5px;
+    height: 80px;
+    border-radius: 15px;
+    display: inline-block;
+    background-color: #EAF4ED;
+}
+
+.valid-plot {
+    background-color: rgba(115, 175, 134, 0.3)!important;
+    border: 5px solid #73AF86!important;
+}
+
+.plant-icon-main {
+    fill: #73AF86;
+    color: #73AF86;
+}
+
+/* .valid-plot:hover + .hover-img-icon {
+    opacity: 1;
+} */
+.hover-img-icon {
+    opacity: 0;
+}
+.valid-plot:hover .hover-img-icon{
+    opacity: .6;
+    cursor: pointer;
+    /* background-color: #EAF4ED; */
+}
+
+.progress-list > div {
+    background-color: #F4F9F3;
+}
+
+.progress-list > div:hover:not(.valid-plot) {
+    background-color: rgba(115, 175, 134, 0.3)!important;
+    border: 5px solid #73AF86!important;
+    cursor: pointer;
+}

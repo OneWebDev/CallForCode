@@ -1,0 +1,191 @@
+<div class="left-sidebar">
+    <h1 class="text-4xl text-center mt-8 font-bold tracking-wide text-white" style="width: 260px;">
+        Plantr
+    </h1>
+    <ul class="mt-20">
+        <li class="flex items-center mb-6 p-3 ml-4 rounded-l-full sidebar-active">
+            <img src="./icons/plant.svg" class="inline-block ml-6 w-6">
+            <span class="text-xl text-white ml-6">
+                My Plants
+            </span>    
+        </li>
+        <li class="flex items-center mb-6 p-3 ml-4 rounded-l-full">
+            <img src="./icons/alerts.svg" class="inline-block ml-6 w-6">
+            <span class="text-xl text-white ml-6">
+                Alerts
+            </span>    
+        </li>
+        <a href="/wiki">
+            <li class="flex items-center mb-6 p-3 ml-4 rounded-l-full">
+                <img src="./icons/wiki.svg" class="inline-block ml-6 w-6">
+                <span class="text-xl text-white ml-6">
+                    Guides
+                </span>    
+            </li>
+        </a>
+        <li class="flex items-center mb-6 p-3 ml-4 rounded-l-full">
+            <img src="./icons/plots.svg" class="inline-block ml-6 w-6">
+            <span class="text-xl text-white ml-6">
+                Live Plots
+            </span>    
+        </li>
+        <li class="flex items-center mb-6 p-3 ml-4 rounded-l-full">
+            <img src="./icons/settings.svg" class="inline-block ml-6 w-6">
+            <span class="text-xl text-white ml-6">
+                Settings
+            </span>    
+        </li>
+    </ul>
+</div><div class="main-page">
+    <div class="better-container">
+        <h1 class="text-4xl font-bold mt-16 tracking-wide">
+            My Plants
+        </h1>
+        <div class="plant-grid mt-2">
+            <div v-for="n in 8" class="inline-block">
+                <!-- <span style="position: relative; margin-left: 12px; margin-top: 5px; "><small>{{n}}</small></span> -->
+                <div class="plot-background inline-block rounded-lg" v-if="! (n in plots)">
+                </div>
+                <div class="plot-background inline-block rounded-lg valid-plot" 
+                @click="newActivePlot(n)" v-else>
+                    <img src="./icons/plant_filled.svg" class="plant-icon-main" style="width: 40px; margin: 16px;" v-if="activePlot == n">
+                    <img src="./icons/plant_filled.svg" class="plant-icon-main hover-img-icon" style="width: 40px; margin: 16px;" v-if="activePlot != n">
+                </div>
+            </div>
+        </div>
+        <h1 class="text-4xl font-bold mt-16 tracking-wide">
+            Progress
+        </h1>
+        <div class="progress-list mb-2" style="max-width: 750px;">
+            <div v-for="(plot, index) in plots" :key="index" 
+            @click="newActivePlot(index)"
+            :class="(index == activePlot) ? 'mt-4 valid-plot' : 'mt-4'" 
+            style="border-radius: 20px; border: 5px solid #F4F9F3;">
+                <div class="p-3">
+                    <img :src="getPlantIcon(index)" class="w-16 inline-block align-top rounded-full h-16">
+                    <div class="inline-block ml-2 p-2 align-top">
+                        <h2 class="text-xl inline-block m-0 font-bold">
+                            Plot {{index}}
+                        </h2>
+                        <h2 class="inline-block ml-4 text-lg">
+                            {{plot.type}}
+                        </h2>
+                    </div>
+                    <div class="inline-block align-bottom text-lg font-bold mt-10 mr-2" style="float: right;">
+                        Age: 5 days
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><div class="right-sidebar">
+    <div class="">
+        <div style="" class="pt-16 rrrr">
+        <!-- <div style="background-color: #F4F9F3; padding-bottom: 1px;" class="pt-16 rrrr"> -->
+                <h1 class="text-3xl font-bold tracking-wide  p-4">
+                {{plots[activePlot].type}}
+            </h1>
+            <!-- <ul>
+                <li class="flex items-center mb-2 p-1 ml-64 rounded-l-full sidebar-active">
+                    <span class="text-xl text-white ml-6">
+                        Plant Details    
+                </li>
+                <li class="flex items-center mb-2 p-1 ml-64 rounded-l-full">
+                    <span class="text-xl ml-6">
+                        Growing Guide
+                    </span>    
+                </li>
+            </ul> -->
+            
+        </div>
+
+        <!-- <ul class="mt-8 pr-6">
+            <li v-for="(item, index) in examplePlot.attr" :key="index" 
+            class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full">
+                <img :src="`./icons/${index}.svg`" class="inline-block ml-12 w-8">
+                <span class="text-xl ml-6" style="width: 100%;">
+                    <strong>
+                        {{index}}
+                    </strong>
+                </span>    
+                {{item}}
+            </li>
+        </ul> -->
+
+        <ul class="mt-8 pr-6">
+            <li class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full"><img src="./icons/health.svg" class="inline-block ml-12 w-8"> <span class="text-xl ml-6" style="width: 100%;"><strong>
+               health
+               </strong></span>    
+               Healthy
+            </li>
+            <li class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full"><img src="./icons/water.svg" class="inline-block ml-12 w-8"> <span class="text-xl ml-6" style="width: 100%;"><strong>
+               water
+               </strong></span>    
+               {{getPlantStat(activePlot, 'moists')}}
+            </li>
+            <li class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full"><img src="./icons/humidity.svg" class="inline-block ml-12 w-8"> <span class="text-xl ml-6" style="width: 100%;"><strong>
+               humidity
+               </strong></span>    
+               {{getPlantStat(activePlot, 'humid')}}
+            </li>
+            <li class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full"><img src="./icons/light.svg" class="inline-block ml-12 w-8"> <span class="text-xl ml-6" style="width: 100%;"><strong>
+               light
+               </strong></span>    
+               {{100 * getPlantStat(activePlot, 'lights') / 1000 }}&nbsp;%
+            </li>
+            <li class="flex items-center p-3 py-1 ml-3 mx-8 rounded-l-full"><img src="./icons/size.svg" class="inline-block ml-12 w-8"> <span class="text-xl ml-6" style="width: 100%;"><strong>
+               temperature
+               </strong></span>    
+               {{getPlantStat(activePlot, 'temps')}}&nbsp;°F
+            </li>
+         </ul>
+
+
+        <div class="mt-12">
+            <span v-for="(item, index) in categories" :key="index">
+                <span v-if="selectedCategory == item" 
+                class="text-2xl font-bold text-black px-5 ">
+                    {{item}}
+                </span>
+                <span v-else @click="changeCategory(item)"
+                class="text-2xl font-bold text-gray-400 px-5 hover:text-black cursor-pointer">
+                    {{item}}
+                </span>
+            </span>
+        </div>
+        <div class="mt-2 pl-2 pr-10 pt-2">
+            <div v-if="selectedCategory == 'Action Items'">
+                <div v-for="(item, index) in examplePlot.actions" :key="index" 
+                style="border-radius: 20px; background-color: #F4F9F3; border: 5px solid #F4F9F3;"
+                class="mt-3 p-2 px-4 actionItems"
+                @click="postNewAction(item.type)"
+                >
+                    <h2 class="text-xl">
+                        <strong>{{item.title}}</strong>
+                    </h2>
+                    <h2 class="text-lg">
+                        {{item.desc}}
+                </h2>
+                </div>
+            </div>
+            <div v-else-if="selectedCategory == 'Snapshots'">
+                <div v-for="(item, index) in plots[activePlot].images.filter(e => ! e.includes('default') )" :key="index">
+                    <div class="mt-4">
+                        <div class="w-64" style="width: 80%; position: relative; min-height: 80px; margin: auto;">
+                            <center>
+                                <img :src="item" alt="" style="border-radius: 10px;margin: 2px;">
+                            </center>
+                            <div style="position: absolute;
+                                bottom: 10px; right: 10px;background: rgba(0, 0, 0, 0.8);padding: 5px 12px;color:white;border-radius: 5px;">
+                                    {{getTitleText(item)}}
+                                </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <br />
+        </div>
+    </div>
+</div>
+
